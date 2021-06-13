@@ -11,6 +11,17 @@ class ToolController extends Controller
     {
         return response()->json([
             [
+                "component" => "avatar-field",
+                "prefixComponent" => true,
+                "indexName" => __("Avatar"),
+                "name" => __("Avatar"),
+                "attribute" => "avatar",
+                "value" => auth()->user()->avatar,
+                "panel" => null,
+                "sortable" => false,
+                "textAlign" => "left"
+            ],
+            [
                 "component" => "text-field",
                 "prefixComponent" => true,
                 "indexName" => __("Name"),
