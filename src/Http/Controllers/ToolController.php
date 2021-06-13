@@ -2,6 +2,7 @@
 
 namespace SaintSystems\Nova\EditProfile\Http\Controllers;
 
+use Storage;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
 
@@ -17,6 +18,7 @@ class ToolController extends Controller
                 "name" => __("Avatar"),
                 "attribute" => "avatar",
                 "value" => auth()->user()->avatar,
+                "previewUrl" => Storage::url(auth()->user->avatar),
                 "panel" => null,
                 "sortable" => false,
                 "textAlign" => "left",
