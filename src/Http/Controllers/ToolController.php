@@ -11,6 +11,20 @@ class ToolController extends Controller
     {
         return response()->json([
             [
+                "component" => "file-field",
+                "prefixComponent" => true,
+                "indexName" => __("Avatar"),
+                "name" => __("Avatar"),
+                "attribute" => "avatar",
+                "value" => auth()->user()->avatar,
+                "panel" => null,
+                "sortable" => false,
+                "textAlign" => "left",
+                "deletable" => true,
+                "downloadable" => true,
+                "acceptedType" => "image/*"
+            ],
+            [
                 "component" => "text-field",
                 "prefixComponent" => true,
                 "indexName" => __("Name"),
@@ -74,6 +88,12 @@ class ToolController extends Controller
                 'email' => request('email'),
                 'password' => Hash::make(request('password')),
             ]);
+            if($file = $request->file('avatar')) {
+                $avatar = Storage::url($file->store('avatars'));
+                $user->update([
+                    'avatar' => $avatar
+                ]);
+            }
         } else {
             auth()->user()->update(request()->only('name', 'email'));
         }
